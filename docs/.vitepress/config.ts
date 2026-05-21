@@ -41,6 +41,7 @@ export default defineConfig({
   title: 'cakephp-queue',
   description: 'Reliable database-backed job queue for CakePHP with admin dashboard, retries, scheduling, and built-in tasks.',
   base: '/cakephp-queue/',
+  cleanUrls: true,
   lastUpdated: true,
   sitemap: {
     hostname: 'https://dereuromark.github.io/cakephp-queue/',

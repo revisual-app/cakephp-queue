@@ -26,6 +26,14 @@ return [
 		'defaultRequeueTimeout' => 180, // 3 minutes
 		// Legacy: 'defaultworkertimeout' is deprecated but still supported
 
+		// Threshold in seconds: a queue_processes row whose heartbeat (`modified`
+		// timestamp) is older than this is treated as a dead worker by a
+		// starting worker and cleaned up. Workers refresh their heartbeat every
+		// loop, so a row not touched in this window almost certainly belongs to
+		// a force-killed process. Intentionally much shorter than
+		// defaultRequeueTimeout (which governs in-flight job requeueing).
+		'staleHeartbeatThreshold' => 90, // 90 seconds
+
 		// minimum time (in seconds) which a task remains in the database before being cleaned up.
 		'cleanuptimeout' => 2592000, // 30 days
 
@@ -62,6 +70,18 @@ return [
 
 		// set default datasource connection
 		'connection' => null,
+
+		// Multi-connection mode: whitelist of datasource connection names a
+		// worker / job command may run against. Leave empty (or with fewer than
+		// 2 entries) to stay in single-connection mode, where the singular
+		// `connection` above (or 'default') is used. With 2+ entries, the first
+		// is the default and any --connection passed to the run/job commands
+		// must appear in this list or a RuntimeException is thrown. The admin
+		// dashboard also exposes a connection switcher when this has 2+ entries.
+		'connections' => [
+			//'default',
+			//'queue_secondary',
+		],
 
 		// enable Search. requires friendsofcake/search
 		'isSearchEnabled' => true,

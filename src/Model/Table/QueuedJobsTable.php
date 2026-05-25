@@ -14,8 +14,8 @@ use Cake\Log\Log;
 use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use CakeDto\Dto\FromArrayToArrayInterface;
 use InvalidArgumentException;
+use PhpCollective\Dto\Dto\FromArrayToArrayInterface;
 use Queue\Config\JobConfig;
 use Queue\Model\Entity\QueuedJob;
 use Queue\Model\Filter\QueuedJobsCollection;
@@ -205,7 +205,7 @@ class QueuedJobsTable extends Table {
 			$config = $this->createConfig()->fromArray($config);
 		}
 
-		if ($data instanceof FromArrayToArrayInterface) {
+		if (interface_exists(FromArrayToArrayInterface::class) && $data instanceof FromArrayToArrayInterface) {
 			$data = $data->toArray();
 		} elseif (is_object($data) && method_exists($data, 'toArray')) {
 			$data = $data->toArray();

@@ -51,3 +51,7 @@ Full documentation: https://dereuromark.github.io/cakephp-queue/
 
 ## Cronjob based background scheduling
 If you are looking for scheduling certain background jobs: This plugin works flawlessly with [QueueScheduler plugin](https://github.com/dereuromark/cakephp-queue-scheduler).
+
+## FORK NOTES
+This fork is to add a few features to the original plugin:
+- Add a `QueueProcesses.job_type` column and sets it to the job type when a job is created

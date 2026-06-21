@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 use Cake\Datasource\ConnectionManager;
-use Migrations\AbstractMigration;
+use Migrations\BaseMigration;
 
-class MigrationQueueInitV8 extends AbstractMigration {
+class MigrationQueueInitV8 extends BaseMigration {
 
 	/**
 	 * Up Method.
@@ -172,5 +172,6 @@ class MigrationQueueInitV8 extends AbstractMigration {
 		$this->table('queue_processes')->drop()->save();
 		$this->table('queued_jobs')->drop()->save();
 	}
+
 
 }

@@ -1,8 +1,8 @@
 <?php
 
-use Phinx\Migration\AbstractMigration;
+use Migrations\BaseMigration;
 
-class MigrationQueueRename extends AbstractMigration {
+class MigrationQueueRename extends BaseMigration {
 
 	/**
 	 * Change Method.
@@ -14,7 +14,7 @@ class MigrationQueueRename extends AbstractMigration {
 	 *
 	 * @return void
 	 */
-	public function change() {
+	public function up(): void {
 		$table = $this->table('queued_jobs');
 		$table->renameColumn('job_type', 'job_task')
 			->update();
@@ -26,6 +26,9 @@ class MigrationQueueRename extends AbstractMigration {
 			'encoding' => 'utf8mb4',
 			'collation' => 'utf8mb4_unicode_ci',
 		])->update();
+	}
+public function down(): void {
+
 	}
 
 }

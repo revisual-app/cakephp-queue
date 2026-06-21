@@ -105,6 +105,9 @@ class QueueProcessesTable extends Table {
 				'message' => 'Too many workers running. Check your `Queue.maxworkers` config.',
 			]);
 
+		$validator->notEmptyString('job_type');
+
+
 		return $validator;
 	}
 
@@ -141,14 +144,16 @@ class QueueProcessesTable extends Table {
 	/**
 	 * @param string $pid
 	 * @param string $key
+	 * @param string $jobType
 	 *
 	 * @return int
 	 */
-	public function add(string $pid, string $key): int {
+	public function add(string $pid, string $key, string $jobType): int {
 		$data = [
 			'pid' => $pid,
 			'server' => $this->buildServerString(),
 			'workerkey' => $key,
+			'jobtype' => $jobType,
 		];
 
 		$queueProcess = $this->newEntity($data);

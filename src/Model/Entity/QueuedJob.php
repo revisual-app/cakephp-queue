@@ -21,6 +21,7 @@ use Cake\ORM\Entity;
  * @property string|null $workerkey
  * @property string|null $status
  * @property int $priority
+ * @property string|null $job_type
  * @property \Queue\Model\Entity\QueueProcess $worker_process
  */
 class QueuedJob extends Entity {

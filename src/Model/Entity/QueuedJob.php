@@ -27,6 +27,7 @@ use Cake\ORM\Entity;
  * @property string|null $output
  * @property string|null $headers !
  * @property string|null $message !
+ * @property string|null $job_type
  */
 class QueuedJob extends Entity {
 

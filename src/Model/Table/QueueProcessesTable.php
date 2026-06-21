@@ -108,6 +108,8 @@ class QueueProcessesTable extends Table {
 				'message' => 'Too many workers running. Check your `Queue.maxworkers` config.',
 			]);
 
+		$validator->notEmptyString('job_type');
+
 		return $validator;
 	}
 
@@ -147,7 +149,7 @@ class QueueProcessesTable extends Table {
 	 *
 	 * @return int
 	 */
-	public function add(string $pid, string $key): int {
+	public function add(string $pid, string $key, string $jobType): int {
 		$server = $this->buildServerString();
 
 		// Evict any stale row holding our (pid, server) slot. Common after
@@ -167,6 +169,8 @@ class QueueProcessesTable extends Table {
 			'pid' => $pid,
 			'server' => $server,
 			'workerkey' => $key,
+			'job_type' => $jobType
+
 		];
 
 		$queueProcess = $this->newEntity($data);

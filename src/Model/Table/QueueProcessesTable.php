@@ -153,7 +153,7 @@ class QueueProcessesTable extends Table {
 			'pid' => $pid,
 			'server' => $this->buildServerString(),
 			'workerkey' => $key,
-			'jobtype' => $jobType,
+			'job_type' => $jobType,
 		];
 
 		$queueProcess = $this->newEntity($data);

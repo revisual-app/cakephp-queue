@@ -96,9 +96,10 @@ class Processor {
 	 */
 	public function run(array $args): int {
 		$config = $this->getConfig($args);
+		$jobType = join(',', $config['types']);
 
 		try {
-			$pid = $this->initPid();
+			$pid = $this->initPid($jobType);
 		} catch (PersistenceFailedException $exception) {
 			$this->io->err($exception->getMessage());
 			$limit = (int)Configure::read('Queue.maxworkers');
@@ -325,10 +326,10 @@ class Processor {
 	/**
 	 * @return string
 	 */
-	protected function initPid(): string {
+	protected function initPid($jobType): string {
 		$pid = $this->retrievePid();
 		$key = $this->QueuedJobs->key();
-		$this->QueueProcesses->add($pid, $key);
+		$this->QueueProcesses->add($pid, $key, $jobType);
 
 		$this->pid = $pid;
 
